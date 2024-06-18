@@ -2,9 +2,21 @@ package trabalho_grafos;
 
 import java.util.Scanner;
 
-public class MainPart1 {
-
-	public static void main(String[] args) {
+public class GraphBuilder {
+	
+	public static Graph calculateGraphRepresentation(int numVertex, int numEdge) {
+		 float densidade = numEdge / (numVertex * (numVertex - 1));
+		 System.out.println(densidade);
+		 
+		 if(densidade > 0.8) {
+			 return new GraphAdjacencyMatrix(numVertex);
+		 }
+		 else {
+			 return new GraphAdjacencyList(numVertex);
+		 }
+	}
+	
+	public static Graph buildGraphWithConsole() {
 		Scanner scanner = new Scanner(System.in);		
 		
 		System.out.println("Digite a quantidade de vertices");
@@ -46,19 +58,8 @@ public class MainPart1 {
 		System.out.println(graph.getRepresentationString());
 		
 		scanner.close();
-			
-	}
 		
-	public static Graph calculateGraphRepresentation(int numVertex, int numEdge) {
-		 float densidade = numEdge / (numVertex * (numVertex - 1));
-		 System.out.println(densidade);
-		 
-		 if(densidade > 0.8) {
-			 return new GraphAdjacencyMatrix(numVertex);
-		 }
-		 else {
-			 return new GraphAdjacencyList(numVertex);
-		 }
+		return graph;
 	}
-
+	
 }
