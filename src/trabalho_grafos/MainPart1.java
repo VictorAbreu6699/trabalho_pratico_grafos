@@ -1,0 +1,64 @@
+package trabalho_grafos;
+
+import java.util.Scanner;
+
+public class MainPart1 {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);		
+		
+		System.out.println("Digite a quantidade de vertices");
+		int vertexQtd = scanner.nextInt();		
+		
+		System.out.println("Digite a quantidade de arestas");
+		int edgeQtd = scanner.nextInt();
+		int vertexIn, vertexOut; 
+		Graph graph = calculateGraphRepresentation(vertexQtd, edgeQtd);		
+		
+		for(int i = 0; i < edgeQtd; i++) 
+		{
+			System.out.println(graph.getRepresentationName());
+			System.out.println(graph.getRepresentationString());
+			
+			System.out.println("Digite o vertice de saída da aresta " + i);
+			vertexIn = scanner.nextInt();
+			while(!graph.hasVertex(vertexIn)) {
+				System.out.println("O vertice informado é invalido!");
+				System.out.println("Digite o vertice de saída da aresta " + i);
+				vertexIn = scanner.nextInt();	
+			}
+			
+			System.out.println("Digite o vertice de entrada da aresta " + i);
+			vertexOut = scanner.nextInt();
+			while(!graph.hasVertex(vertexOut)) {
+				System.out.println("O vertice informado é invalido!");
+				System.out.println("Digite o vertice de entrada da aresta " + i);
+				vertexOut = scanner.nextInt();	
+			}
+			
+			System.out.println("Digite o peso da aresta " + i);
+			int weight = scanner.nextInt();			
+			
+			graph.setEdge(vertexIn, vertexOut, weight);
+		}
+		
+		System.out.println(graph.getRepresentationName());
+		System.out.println(graph.getRepresentationString());
+		
+		scanner.close();
+			
+	}
+		
+	public static Graph calculateGraphRepresentation(int numVertex, int numEdge) {
+		 float densidade = numEdge / (numVertex * (numVertex - 1));
+		 System.out.println(densidade);
+		 
+		 if(densidade > 0.8) {
+			 return new GraphAdjacencyMatrix(numVertex);
+		 }
+		 else {
+			 return new GraphAdjacencyList(numVertex);
+		 }
+	}
+
+}
