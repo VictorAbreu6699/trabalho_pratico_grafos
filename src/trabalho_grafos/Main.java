@@ -3,12 +3,14 @@ package trabalho_grafos;
 import java.util.Scanner;
 
 public class Main {
+	
+	private static Scanner scanner;
 
 	public static void main(String[] args) {		
-		Scanner scanner = new Scanner(System.in);
-		Graph graph = null;
+		scanner = new Scanner(System.in);
+		Graph graph = null; 		
 		int choice;
-		boolean validatedChoice = false; 
+		boolean validatedChoice = true; 
 		
 		while(!validatedChoice) {
 			System.out.println("Como deseja construir o grafo?:");
@@ -29,16 +31,15 @@ public class Main {
 					System.out.println("Opção invalida");
 					break;
 			}
-		}
-		
+		}		
 		
 		menu(graph);
+		scanner.close();
 	}
 	
 	public static void menu(Graph graph) {
-		Scanner scanner = new Scanner(System.in);
-		Graph grafo = null;
-
+		int vertexIn, vertexOut, choice;
+		
         while (true) {
             System.out.println("\nMenu:");
             System.out.println("1. Imprimir todas as arestas adjacentes a uma aresta");
@@ -56,13 +57,27 @@ public class Main {
             System.out.println("13. Sair");
             System.out.print("Escolha uma opção: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();  
+            choice = scanner.nextInt();              
 
             switch (choice) {
                 case 1:
-                    // Imprimir todas as arestas adjacentes a uma aresta
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Digite o vertice de saída da aresta");
+        			vertexOut = scanner.nextInt();
+        			while(!graph.hasVertex(vertexOut)) {
+        				System.out.println("O vertice informado é invalido!");
+        				System.out.println("Digite o vertice de saída da aresta");
+        				vertexOut = scanner.nextInt();	
+        			}
+        			
+                	System.out.println("Digite o vertice de entrada da aresta");
+        			vertexIn = scanner.nextInt();
+        			while(!graph.hasVertex(vertexIn)) {
+        				System.out.println("O vertice informado é invalido!");
+        				System.out.println("Digite o vertice de entrada da aresta");
+        				vertexIn = scanner.nextInt();	
+        			}        			
+        			
+        			System.out.println(graph.getAdjacentEdges(vertexOut, vertexIn));
                     break;
                 case 2:
                     // Imprimir todos os vértices adjacentes a um vértice

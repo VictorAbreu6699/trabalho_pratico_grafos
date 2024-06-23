@@ -5,5 +5,6 @@ public interface Graph {
 	public String getRepresentationString();	
 	public void setEdge(int vertexOut, int vertexIn, int weight);
 	public boolean hasVertex(int vertex);
-	
+	public boolean hasEdge(int vertexOut, int vertexIn);
+	public String getAdjacentEdges(int vertexOut, int vertexIn);
 }

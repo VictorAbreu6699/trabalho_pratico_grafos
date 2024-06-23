@@ -6,10 +6,9 @@ public class GraphBuilder {
 	
 	public static Graph calculateGraphRepresentation(int numVertex, int numEdge) {
 		 float densidade = numEdge / (numVertex * (numVertex - 1));
-		 System.out.println(densidade);
 		 
-		 if(densidade > 0.8) {
-			 return new GraphAdjacencyMatrix(numVertex);
+		 if(densidade > 0.5) {
+		 	return new GraphAdjacencyMatrix(numVertex);
 		 }
 		 else {
 			 return new GraphAdjacencyList(numVertex);
@@ -33,6 +32,14 @@ public class GraphBuilder {
 			System.out.println(graph.getRepresentationString());
 			
 			System.out.println("Digite o vertice de saída da aresta " + i);
+			vertexOut = scanner.nextInt();
+			while(!graph.hasVertex(vertexOut)) {
+				System.out.println("O vertice informado é invalido!");
+				System.out.println("Digite o vertice de saída da aresta " + i);
+				vertexOut = scanner.nextInt();	
+			}
+			
+			System.out.println("Digite o vertice de entrada da aresta " + i);
 			vertexIn = scanner.nextInt();
 			while(!graph.hasVertex(vertexIn)) {
 				System.out.println("O vertice informado é invalido!");
@@ -40,24 +47,14 @@ public class GraphBuilder {
 				vertexIn = scanner.nextInt();	
 			}
 			
-			System.out.println("Digite o vertice de entrada da aresta " + i);
-			vertexOut = scanner.nextInt();
-			while(!graph.hasVertex(vertexOut)) {
-				System.out.println("O vertice informado é invalido!");
-				System.out.println("Digite o vertice de entrada da aresta " + i);
-				vertexOut = scanner.nextInt();	
-			}
-			
 			System.out.println("Digite o peso da aresta " + i);
 			int weight = scanner.nextInt();			
 			
-			graph.setEdge(vertexIn, vertexOut, weight);
+			graph.setEdge(vertexOut, vertexIn, weight);
 		}
 		
 		System.out.println(graph.getRepresentationName());
 		System.out.println(graph.getRepresentationString());
-		
-		scanner.close();
 		
 		return graph;
 	}
