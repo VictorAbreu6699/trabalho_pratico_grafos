@@ -114,5 +114,11 @@ public class GraphAdjacencyList implements Graph{
 	    return result;
 	}
 
+	@Override
+	public String getAdjacentVertices(int vertexOut, int vertexIn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

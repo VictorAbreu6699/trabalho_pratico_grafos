@@ -6,11 +6,11 @@ public class Main {
 	
 	private static Scanner scanner;
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) throws Exception {		
 		scanner = new Scanner(System.in);
 		Graph graph = null; 		
 		int choice;
-		boolean validatedChoice = true; 
+		boolean validatedChoice = false; 
 		
 		while(!validatedChoice) {
 			System.out.println("Como deseja construir o grafo?:");
@@ -24,7 +24,7 @@ public class Main {
 					validatedChoice = true;
 					break;
 				case 2:
-					graph = GraphBuilder.buildGraphWithConsole();
+					graph = GraphBuilder.buildGraphWithDIMACSFile();
 					validatedChoice = true;
 					break;
 				default:
@@ -41,7 +41,7 @@ public class Main {
 		int vertexIn, vertexOut, choice;
 		
         while (true) {
-            System.out.println("\nMenu:");
+            System.out.println("Menu:");
             System.out.println("1. Imprimir todas as arestas adjacentes a uma aresta");
             System.out.println("2. Imprimir todos os vértices adjacentes a um vértice");
             System.out.println("3. Imprimir todas as arestas incidentes a um vértice");
@@ -78,6 +78,7 @@ public class Main {
         			}        			
         			
         			System.out.println(graph.getAdjacentEdges(vertexOut, vertexIn));
+        			System.out.println();
                     break;
                 case 2:
                     // Imprimir todos os vértices adjacentes a um vértice

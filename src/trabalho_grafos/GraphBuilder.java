@@ -1,5 +1,8 @@
 package trabalho_grafos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GraphBuilder {
@@ -58,5 +61,56 @@ public class GraphBuilder {
 		
 		return graph;
 	}
+	
+	public static Graph buildGraphWithDIMACSFile() throws Exception {
+		return readDIMASCFile("src/trabalho_grafos/graph.dimacs");
+	}
+	
+	public static Graph readDIMASCFile(String path) throws Exception {
+		Graph graph = null;
+		String row;
+		int i = 0, vertexQtd, edgeQtd, vertexIn, vertexOut, weight;
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            while ((row = br.readLine()) != null) {
+            	String[] rowSplited = row.split(" ");
+            	// Na primeira linha tem o numero de vertices e de arestas
+                if(i == 0) {
+            		vertexQtd = Integer.parseInt(rowSplited[0]);
+            		edgeQtd = Integer.parseInt(rowSplited[1]);
+            		
+            		graph = calculateGraphRepresentation(vertexQtd, edgeQtd);            		
+            		System.out.println(graph.getRepresentationName());
+                }
+                else {
+                	// Nas demais linhas somente as arestas e seus respectivos pesos
+                	vertexOut = Integer.parseInt(rowSplited[0]);
+                	vertexIn = Integer.parseInt(rowSplited[1]);
+                	weight = Integer.parseInt(rowSplited[2]);
+            		
+                	if(!graph.hasVertex(vertexOut)) {
+                		throw new Exception("Vertice de saida invalido na Linha " + i);
+                	}
+                	
+                	if(!graph.hasVertex(vertexIn)) {
+                		throw new Exception("Vertice de entrada invalido na Linha " + i);
+                	}
+                	
+                	graph.setEdge(vertexOut, vertexIn, weight);
+                }
+                
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+        	throw e;
+        }
+		
+		System.out.println(graph.getRepresentationString());
+		
+		return graph;
+	}
+	
 	
 }
