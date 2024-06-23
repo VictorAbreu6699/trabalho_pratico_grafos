@@ -115,10 +115,33 @@ public class GraphAdjacencyList implements Graph{
 	}
 
 	@Override
-	public String getAdjacentVertices(int vertexOut, int vertexIn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String getAdjacentVertices(int vertex) {
+		if (!hasVertex(vertex)) {
+	        return "Vértice não encontrado.";
+	    }
+		
+		String result = "";
+	    for (int i = 0; i < this.numVertex; i++) {
+	    	GraphListAdjacencyNode current = this.graph.get(i);
+	    	while (current != null) {
+	    		if(i == vertex && current.getVertex() != vertex) {
+	    			result += "(" + current.getVertex() +") ";	
+	    		}
+	    		else if(i != vertex && current.getVertex() == vertex) {	    			
+	    			result += "(" + i +") ";	    			
+    			}
+	            
+	            current = current.getSuccessor();
+	        }
+		}
+		
+		
+		if(result.length() == 0)
+	    {
+	    	result = "Não foram encontrados vertices adjacentes.";
+	    }
 
+	    return result;
+	}
 
 }

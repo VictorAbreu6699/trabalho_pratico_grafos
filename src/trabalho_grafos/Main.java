@@ -38,7 +38,7 @@ public class Main {
 	}
 	
 	public static void menu(Graph graph) {
-		int vertexIn, vertexOut, choice;
+		int vertexIn, vertexOut, choice, vertex;
 		
         while (true) {
             System.out.println("Menu:");
@@ -81,8 +81,16 @@ public class Main {
         			System.out.println();
                     break;
                 case 2:
-                    // Imprimir todos os vértices adjacentes a um vértice
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Digite o vertice");
+        			vertex = scanner.nextInt();
+        			while(!graph.hasVertex(vertex)) {
+        				System.out.println("O vertice informado é invalido!");
+        				System.out.println("Digite o vertice");
+        				vertex = scanner.nextInt();
+        			}
+        			
+        			System.out.println(graph.getAdjacentVertices(vertex));
+        			System.out.println();
                     break;
                 case 3:
                     // Imprimir todas as arestas incidentes a um vértice

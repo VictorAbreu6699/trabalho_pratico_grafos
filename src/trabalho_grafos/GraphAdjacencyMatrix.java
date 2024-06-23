@@ -6,14 +6,6 @@ public class GraphAdjacencyMatrix implements Graph{
 	
 	public GraphAdjacencyMatrix(int numVertex) {
 		this.graph = new Integer[numVertex][numVertex];
-//		Integer i [][] = {
-//	            {null, 1, null, 1},
-//	            {null, null, 1, null},
-//	            {1, null, null, null},
-//	            {null, null, 1, null}
-//	        };
-//		
-//		this.graph = i;
 	}	
 	
 	@Override
@@ -97,9 +89,29 @@ public class GraphAdjacencyMatrix implements Graph{
 	}
 
 	@Override
-	public String getAdjacentVertices(int vertexOut, int vertexIn) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getAdjacentVertices(int vertex) {
+		if (!hasVertex(vertex)) {
+	        return "Vértice não encontrado.";
+	    }
+		
+		String result = "";
+		for (int i = 0; i < this.graph.length; i++) {
+	        if (this.graph[vertex][i] != null && i != vertex) {
+	            result += "(" + i + ")";
+	        }
+	        
+	        if (this.graph[i][vertex] != null && i != vertex) {
+	            result += "(" + i + ") ";
+	        }
+	    }
+		
+		
+		if(result.length() == 0)
+	    {
+	    	result = "Não foram encontrados vertices adjacentes.";
+	    }
+
+	    return result;
 	}
 
 }

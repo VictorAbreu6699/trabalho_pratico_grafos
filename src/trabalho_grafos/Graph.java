@@ -7,5 +7,5 @@ public interface Graph {
 	public boolean hasVertex(int vertex);
 	public boolean hasEdge(int vertexOut, int vertexIn);
 	public String getAdjacentEdges(int vertexOut, int vertexIn);
-	public String getAdjacentVertices(int vertexOut, int vertexIn);
+	public String getAdjacentVertices(int vertex);
 }
