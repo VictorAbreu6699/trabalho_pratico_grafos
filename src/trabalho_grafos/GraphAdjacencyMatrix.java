@@ -114,4 +114,30 @@ public class GraphAdjacencyMatrix implements Graph{
 	    return result;
 	}
 
+	@Override
+	public String getIncidentEdgesToVertex(int vertex) {
+		if (!hasVertex(vertex)) {
+	        return "Vértice não encontrado.";
+	    }
+		
+		String result = "";
+		for (int i = 0; i < this.graph.length; i++) {
+	        if (this.graph[vertex][i] != null && i != vertex) {
+	            result += "(" + vertex + " -> " + i + ", peso: " + this.graph[vertex][i] + ") ";
+	        }
+	        
+	        if (this.graph[i][vertex] != null && i != vertex) {
+	        	result += "(" + i + " -> " + vertex + ", peso: " + this.graph[i][vertex] + ") ";
+	        }
+	    }
+		
+		
+		if(result.length() == 0)
+	    {
+	    	result = "Não foram encontrados vertices incidentes.";
+	    }
+
+	    return result;
+	}
+
 }

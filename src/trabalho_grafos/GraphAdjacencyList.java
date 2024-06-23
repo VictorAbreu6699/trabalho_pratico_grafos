@@ -144,4 +144,34 @@ public class GraphAdjacencyList implements Graph{
 	    return result;
 	}
 
+	@Override
+	public String getIncidentEdgesToVertex(int vertex) {
+		if (!hasVertex(vertex)) {
+	        return "Vértice não encontrado.";
+	    }
+		
+		String result = "";
+	    for (int i = 0; i < this.numVertex; i++) {
+	    	GraphListAdjacencyNode current = this.graph.get(i);
+	    	while (current != null) {
+	    		if(i == vertex && current.getVertex() != vertex) {
+	    			result += "(" + i + " -> " + current.getVertex() + ", peso: " + current.getWeight() + ") ";
+	    		}
+	    		else if(i != vertex && current.getVertex() == vertex) {	   
+	    			result += "(" + i + " -> " + current.getVertex() + ", peso: " + current.getWeight() + ") ";
+    			}
+	            
+	            current = current.getSuccessor();
+	        }
+		}
+		
+		
+		if(result.length() == 0)
+	    {
+	    	result = "Não foram encontrados vertices incidentes.";
+	    }
+
+	    return result;
+	}
+
 }

@@ -93,12 +93,36 @@ public class Main {
         			System.out.println();
                     break;
                 case 3:
-                    // Imprimir todas as arestas incidentes a um vértice
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Digite o vertice");
+        			vertex = scanner.nextInt();
+        			while(!graph.hasVertex(vertex)) {
+        				System.out.println("O vertice informado é invalido!");
+        				System.out.println("Digite o vertice");
+        				vertex = scanner.nextInt();
+        			}
+        			
+        			System.out.println(graph.getIncidentEdgesToVertex(vertex));
+        			System.out.println();
                     break;
                 case 4:
-                    // Imprimir todos os vértices incidentes a uma aresta
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Digite o vertice de saída da aresta");
+        			vertexOut = scanner.nextInt();
+        			while(!graph.hasVertex(vertexOut)) {
+        				System.out.println("O vertice informado é invalido!");
+        				System.out.println("Digite o vertice de saída da aresta");
+        				vertexOut = scanner.nextInt();	
+        			}
+        			
+                	System.out.println("Digite o vertice de entrada da aresta");
+        			vertexIn = scanner.nextInt();
+        			while(!graph.hasVertex(vertexIn)) {
+        				System.out.println("O vertice informado é invalido!");
+        				System.out.println("Digite o vertice de entrada da aresta");
+        				vertexIn = scanner.nextInt();	
+        			}
+        			
+        			System.out.println(vertexOut + " " + vertexIn);
+        			
                     break;
                 case 5:
                     // Imprimir o grau do vértice

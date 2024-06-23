@@ -8,4 +8,5 @@ public interface Graph {
 	public boolean hasEdge(int vertexOut, int vertexIn);
 	public String getAdjacentEdges(int vertexOut, int vertexIn);
 	public String getAdjacentVertices(int vertex);
+	public String getIncidentEdgesToVertex(int vertex);	
 }

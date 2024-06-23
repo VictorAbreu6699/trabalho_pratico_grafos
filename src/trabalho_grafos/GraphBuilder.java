@@ -14,7 +14,7 @@ public class GraphBuilder {
 		 	return new GraphAdjacencyMatrix(numVertex);
 		 }
 		 else {
-			 return new GraphAdjacencyList(numVertex);
+			return new GraphAdjacencyList(numVertex);
 		 }
 	}
 	
