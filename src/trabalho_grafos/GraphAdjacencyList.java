@@ -174,4 +174,24 @@ public class GraphAdjacencyList implements Graph{
 	    return result;
 	}
 
+	@Override
+	public int getDegreeVertex(int vertex) {
+		int degree = 0;
+		
+		for (int i = 0; i < this.numVertex; i++) {
+	    	GraphListAdjacencyNode current = this.graph.get(i);
+	    	while (current != null) {
+	    		if(i == vertex && current.getVertex() != vertex) {
+	    			degree++;	
+	    		}
+	    		else if(i != vertex && current.getVertex() == vertex) {	    			
+	    			degree++;	    			
+    			}
+	            
+	            current = current.getSuccessor();
+	        }
+		}
+		return degree;
+	}
+
 }

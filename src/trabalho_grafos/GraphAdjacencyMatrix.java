@@ -140,4 +140,21 @@ public class GraphAdjacencyMatrix implements Graph{
 	    return result;
 	}
 
+	@Override
+	public int getDegreeVertex(int vertex) {
+		int degree = 0;
+		
+		for (int i = 0; i < this.graph.length; i++) {
+	        if (this.graph[vertex][i] != null && i != vertex) {
+	        	degree++;
+	        }
+	        
+	        if (this.graph[i][vertex] != null && i != vertex) {
+	        	degree++;
+	        }
+	    }
+		
+		return degree;
+	}
+
 }
