@@ -11,4 +11,5 @@ public interface Graph {
 	public String getIncidentEdgesToVertex(int vertex);
 	public int getDegreeVertex(int vertex);
 	public boolean isAdjacent(int vertex, int vertexB);
+	public void alterEdgeWeight(int vertexOut, int vertexIn, int weight);
 }

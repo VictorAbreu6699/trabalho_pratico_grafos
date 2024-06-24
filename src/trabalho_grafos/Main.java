@@ -38,7 +38,7 @@ public class Main {
 	}
 	
 	public static void menu(Graph graph) {
-		int vertexIn, vertexOut, choice, vertex, vertexB;
+		int vertexIn, vertexOut, choice, vertex, vertexB, weight;
 		
         while (true) {
             System.out.println("Menu:");
@@ -103,8 +103,22 @@ public class Main {
         			   
                     break;
                 case 7:
-                    // Substituir o peso de uma aresta
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	vertexOut = getVertexOutMenu(graph);
+        			vertexIn = getVertexInMenu(graph);
+        			
+        			while(!graph.hasEdge(vertexOut, vertexIn)) {
+        				System.out.println("A aresta informada é invalida!");
+        				vertexOut = getVertexOutMenu(graph);
+            			vertexIn = getVertexInMenu(graph);
+        			}
+        			
+        			System.out.println("Digite o peso da aresta");
+        			weight = scanner.nextInt();
+        			
+        			graph.alterEdgeWeight(vertexOut, vertexIn, weight);
+        			
+        			System.out.println(graph.getRepresentationString());
+        			
                     break;
                 case 8:
                     // Trocar dois vértices

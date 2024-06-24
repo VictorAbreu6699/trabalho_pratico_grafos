@@ -203,4 +203,17 @@ public class GraphAdjacencyList implements Graph{
 		return false;
 	}
 
+	@Override
+	public void alterEdgeWeight(int vertexOut, int vertexIn, int weight) {
+		if (this.graph.containsKey(vertexOut)) {
+	        GraphListAdjacencyNode current = this.graph.get(vertexOut);
+	        while (current != null) {
+	            if (current.getVertex() == vertexIn) {
+	                current.setWeight(weight);
+	            }
+	            current = current.getSuccessor();
+	        }
+	    }		
+	}
+
 }

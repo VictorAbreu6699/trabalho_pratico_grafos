@@ -166,4 +166,9 @@ public class GraphAdjacencyMatrix implements Graph{
 		return false;
 	}
 
+	@Override
+	public void alterEdgeWeight(int vertexOut, int vertexIn, int weight) {
+		setEdge(vertexOut, vertexIn, weight);
+	}
+
 }
