@@ -131,8 +131,10 @@ public class Main {
         			System.out.println(graph.getRepresentationString());
                     break;
                 case 9:
-                    // Busca em Largura
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	vertex = getVertexMenu(graph);
+                	
+                	System.out.println(graph.buscaEmLargura(vertex));
+                	
                     break;
                 case 10:
                     // Busca em Profundidade

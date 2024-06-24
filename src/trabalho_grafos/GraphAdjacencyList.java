@@ -1,7 +1,13 @@
 package trabalho_grafos;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 public class GraphAdjacencyList implements Graph{	
 	
@@ -239,6 +245,90 @@ public class GraphAdjacencyList implements Graph{
 	        }
 	    }
 		
+	}
+
+	@Override
+	public String buscaEmLargura(int startVertex) {
+
+	    // Array para armazenar os vértices visitados
+	    boolean[] visited = new boolean[numVertex];
+	    
+	    // Array para armazenar o nível de cada vértice na árvore de busca
+	    int[] level = new int[numVertex];
+	    
+	    // Array para armazenar o predecessor de cada vértice na árvore de busca
+	    int[] predecessor = new int[numVertex];
+	    
+	    // Inicializa todos os predecessores com -1 (nenhum predecessor)
+	    Arrays.fill(predecessor, -1);
+
+	    // Fila para gerenciar a ordem de visitação dos vértices
+	    Queue<Integer> queue = new LinkedList<>();
+	    
+	    // Adiciona o vértice inicial na fila
+	    queue.add(startVertex);
+	    
+	    // Marca o vértice inicial como visitado
+	    visited[startVertex] = true;
+	    
+	    // Define o nível do vértice inicial como 0 (raiz da árvore de busca)
+	    level[startVertex] = 0;
+
+	    // Enquanto houver vértices na fila, executa
+	    while (!queue.isEmpty()) {
+	        // Remove o primeiro vértice da fila
+	        int vertex = queue.poll();
+	        
+	        // Obtém a lista de vizinhos do vértice atual
+	        List<Integer> neighbors = getNeighbors(vertex);
+	        
+	        // Ordena os vizinhos em ordem numérica crescente
+	        Collections.sort(neighbors);
+
+	        // Itera sobre cada vizinho
+	        for (int neighbor : neighbors) {
+	            // Se o vizinho não foi visitado
+	            if (!visited[neighbor]) {
+	                // Marca o vizinho como visitado
+	                visited[neighbor] = true;
+	                
+	                // Adiciona o vizinho na fila
+	                queue.add(neighbor);
+	                
+	                // Define o nível do vizinho (nível do vértice atual + 1)
+	                level[neighbor] = level[vertex] + 1;
+	                
+	                // Define o predecessor do vizinho como o vértice atual
+	                predecessor[neighbor] = vertex;
+	            }
+	        }
+	    }
+
+	    String result = "Vértice | Nível | Predecessor \n";	    
+	    for (int i = 0; i < numVertex; i++) {
+	        result += String.format("%7d | %5d | %11d%n", i, level[i], predecessor[i]);
+	    }
+
+	    return result;
+	}
+
+	private List<Integer> getNeighbors(int vertex) {
+	    // Lista para armazenar os vizinhos do vértice
+	    List<Integer> neighbors = new ArrayList<>();
+	    
+	    // Verifica se o vértice atual tem vizinhos
+	    if (this.graph.containsKey(vertex)) {
+	        // Obtém o primeiro vizinho do vertice
+	        GraphListAdjacencyNode current = this.graph.get(vertex);
+	        
+	        while (current != null) {
+	            // Adiciona o vizinho à lista
+	            neighbors.add(current.getVertex());	            
+	            current = current.getSuccessor();
+	        }
+	    }
+
+	    return neighbors;
 	}
 
 }
