@@ -10,4 +10,5 @@ public interface Graph {
 	public String getAdjacentVertices(int vertex);
 	public String getIncidentEdgesToVertex(int vertex);
 	public int getDegreeVertex(int vertex);
+	public boolean isAdjacent(int vertex, int vertexB);
 }

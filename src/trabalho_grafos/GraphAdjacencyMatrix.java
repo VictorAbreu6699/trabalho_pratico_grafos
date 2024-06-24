@@ -157,4 +157,13 @@ public class GraphAdjacencyMatrix implements Graph{
 		return degree;
 	}
 
+	@Override
+	public boolean isAdjacent(int vertex, int vertexB) {
+		if(hasEdge(vertex, vertexB) || hasEdge(vertexB, vertex)) {
+			return true;
+		}
+		
+		return false;
+	}
+
 }

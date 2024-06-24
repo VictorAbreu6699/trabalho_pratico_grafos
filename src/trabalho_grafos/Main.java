@@ -38,7 +38,7 @@ public class Main {
 	}
 	
 	public static void menu(Graph graph) {
-		int vertexIn, vertexOut, choice, vertex;
+		int vertexIn, vertexOut, choice, vertex, vertexB;
 		
         while (true) {
             System.out.println("Menu:");
@@ -89,8 +89,18 @@ public class Main {
         			System.out.println(graph.getDegreeVertex(vertex));     
                     break;
                 case 6:
-                    // Determinar se dois vértices são adjacentes
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Primeiro vertice:");
+            		vertex = getVertexMenu(graph);
+            		System.out.println("Segundo vertice:");
+            		vertexB = getVertexMenu(graph);
+            		
+            		if(graph.isAdjacent(vertex, vertexB)) {
+            			System.out.println(vertex + " e " + vertexB + " são adjacentes");
+            		}
+            		else {
+            			System.out.println(vertex + " e " + vertexB + " não são adjacentes");
+            		}
+        			   
                     break;
                 case 7:
                     // Substituir o peso de uma aresta
