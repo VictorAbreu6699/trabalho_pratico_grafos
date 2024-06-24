@@ -89,9 +89,9 @@ public class Main {
         			System.out.println(graph.getDegreeVertex(vertex));     
                     break;
                 case 6:
-                	System.out.println("Primeiro vertice:");
+                	System.out.println("Primeiro:");
             		vertex = getVertexMenu(graph);
-            		System.out.println("Segundo vertice:");
+            		System.out.println("Segundo:");
             		vertexB = getVertexMenu(graph);
             		
             		if(graph.isAdjacent(vertex, vertexB)) {
@@ -121,8 +121,14 @@ public class Main {
         			
                     break;
                 case 8:
-                    // Trocar dois vértices
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Primeiro:");
+            		vertex = getVertexMenu(graph);
+            		System.out.println("Segundo:");
+            		vertexB = getVertexMenu(graph);
+            		
+        			graph.replaceVertex(vertex, vertexB);
+        			
+        			System.out.println(graph.getRepresentationString());
                     break;
                 case 9:
                     // Busca em Largura

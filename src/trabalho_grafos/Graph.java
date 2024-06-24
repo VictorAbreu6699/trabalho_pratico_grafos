@@ -12,4 +12,5 @@ public interface Graph {
 	public int getDegreeVertex(int vertex);
 	public boolean isAdjacent(int vertex, int vertexB);
 	public void alterEdgeWeight(int vertexOut, int vertexIn, int weight);
+	public void replaceVertex(int vertex, int vertexB);
 }

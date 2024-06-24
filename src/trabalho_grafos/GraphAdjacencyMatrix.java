@@ -18,7 +18,7 @@ public class GraphAdjacencyMatrix implements Graph{
 		String graphString = "";
         for (int i = 0; i < this.graph.length; i++) {
             for (int j = 0; j < this.graph[i].length; j++) { 
-            	graphString += this.graph[i][j] + " ";
+            	graphString += (this.graph[i][j] != null ? this.graph[i][j] : "0") + ", ";
             }
             graphString += "\n";
         }
@@ -169,6 +169,22 @@ public class GraphAdjacencyMatrix implements Graph{
 	@Override
 	public void alterEdgeWeight(int vertexOut, int vertexIn, int weight) {
 		setEdge(vertexOut, vertexIn, weight);
+	}
+
+	@Override
+	public void replaceVertex(int vertex, int vertexB) {		
+		
+		for (int i = 0; i < this.graph.length; i++) {
+	        Integer tempOut = this.graph[vertex][i];
+	        this.graph[vertex][i] = this.graph[vertexB][i];
+	        this.graph[vertexB][i] = tempOut;
+	    }
+
+	    for (int i = 0; i < this.graph.length; i++) {
+	        Integer tempIn = this.graph[i][vertex];
+	        this.graph[i][vertex] = this.graph[i][vertexB];
+	        this.graph[i][vertexB] = tempIn;
+	    }
 	}
 
 }

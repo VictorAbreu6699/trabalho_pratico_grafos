@@ -216,4 +216,29 @@ public class GraphAdjacencyList implements Graph{
 	    }		
 	}
 
+	@Override
+	public void replaceVertex(int vertex, int vertexB) {
+		GraphListAdjacencyNode tempVertex = this.graph.get(vertex);
+	    GraphListAdjacencyNode tempVertexB = this.graph.get(vertexB);
+	    // Substitui indice dos vertices da lista
+	    this.graph.put(vertex, tempVertexB);
+	    this.graph.put(vertexB, tempVertex);
+    	
+	    // Substitui os vertices que podem estar em vertices diferentes dos informados.
+	    for (int i = 0; i < this.numVertex; i++) {
+	        if (i == vertex || i == vertexB) continue;
+	        
+	        GraphListAdjacencyNode current = this.graph.get(i);
+	        while (current != null) {
+	            if (current.getVertex() == vertex) {
+	                current.setVertex(vertexB);
+	            } else if (current.getVertex() == vertexB) {
+	                current.setVertex(vertex);
+	            }
+	            current = current.getSuccessor();
+	        }
+	    }
+		
+	}
+
 }
