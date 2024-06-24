@@ -60,22 +60,9 @@ public class Main {
             choice = scanner.nextInt();              
 
             switch (choice) {
-                case 1:
-                	System.out.println("Digite o vertice de saída da aresta");
-        			vertexOut = scanner.nextInt();
-        			while(!graph.hasVertex(vertexOut)) {
-        				System.out.println("O vertice informado é invalido!");
-        				System.out.println("Digite o vertice de saída da aresta");
-        				vertexOut = scanner.nextInt();	
-        			}
-        			
-                	System.out.println("Digite o vertice de entrada da aresta");
-        			vertexIn = scanner.nextInt();
-        			while(!graph.hasVertex(vertexIn)) {
-        				System.out.println("O vertice informado é invalido!");
-        				System.out.println("Digite o vertice de entrada da aresta");
-        				vertexIn = scanner.nextInt();	
-        			}        			
+                case 1:                	
+        			vertexOut = getVertexOutMenu(graph);
+        			vertexIn = getVertexInMenu(graph);        			
         			
         			System.out.println(graph.getAdjacentEdges(vertexOut, vertexIn));
                     break;
@@ -90,28 +77,16 @@ public class Main {
         			System.out.println(graph.getIncidentEdgesToVertex(vertex));        			
                     break;
                 case 4:
-                	System.out.println("Digite o vertice de saída da aresta");
-        			vertexOut = scanner.nextInt();
-        			while(!graph.hasVertex(vertexOut)) {
-        				System.out.println("O vertice informado é invalido!");
-        				System.out.println("Digite o vertice de saída da aresta");
-        				vertexOut = scanner.nextInt();	
-        			}
-        			
-                	System.out.println("Digite o vertice de entrada da aresta");
-        			vertexIn = scanner.nextInt();
-        			while(!graph.hasVertex(vertexIn)) {
-        				System.out.println("O vertice informado é invalido!");
-        				System.out.println("Digite o vertice de entrada da aresta");
-        				vertexIn = scanner.nextInt();	
-        			}
+                	vertexOut = getVertexOutMenu(graph);
+        			vertexIn = getVertexInMenu(graph);
         			
         			System.out.println(vertexOut + " " + vertexIn);
         			
                     break;
                 case 5:
-                    // Imprimir o grau do vértice
-                    System.out.println("Funcionalidade não implementada ainda.");
+            		vertex = getVertexMenu(graph);
+            		
+        			System.out.println(graph.getDegreeVertex(vertex));     
                     break;
                 case 6:
                     // Determinar se dois vértices são adjacentes
@@ -153,11 +128,11 @@ public class Main {
 	}
 	
 	public static int getVertexMenu(Graph graph) {
-		System.out.println("Digite o vertice");
+		System.out.println("Digite o vertice:");
 		int vertex = scanner.nextInt();
 		while(!graph.hasVertex(vertex)) {
 			System.out.println("O vertice informado é invalido!");
-			System.out.println("Digite o vertice");
+			System.out.println("Digite o vertice:");
 			vertex = scanner.nextInt();
 		}
 		
@@ -165,11 +140,11 @@ public class Main {
 	}
 	
 	public static int getVertexOutMenu(Graph graph) {
-		System.out.println("Digite o vertice de saída da aresta");
+		System.out.println("Digite o vertice de saída da aresta:");
 		int vertexOut = scanner.nextInt();
 		while(!graph.hasVertex(vertexOut)) {
 			System.out.println("O vertice informado é invalido!");
-			System.out.println("Digite o vertice de saída da aresta");
+			System.out.println("Digite o vertice de saída da aresta:");
 			vertexOut = scanner.nextInt();	
 		}
 		
@@ -177,11 +152,11 @@ public class Main {
 	}
 	
 	public static int getVertexInMenu(Graph graph) {
-		System.out.println("Digite o vertice de entrada da aresta");
+		System.out.println("Digite o vertice de entrada da aresta:");
 		int vertexIn = scanner.nextInt();
 		while(!graph.hasVertex(vertexIn)) {
 			System.out.println("O vertice informado é invalido!");
-			System.out.println("Digite o vertice de entrada da aresta");
+			System.out.println("Digite o vertice de entrada da aresta:");
 			vertexIn = scanner.nextInt();	
 		}
 		
