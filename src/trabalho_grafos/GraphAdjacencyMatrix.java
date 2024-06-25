@@ -3,8 +3,10 @@ package trabalho_grafos;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class GraphAdjacencyMatrix implements Graph{
@@ -330,5 +332,85 @@ public class GraphAdjacencyMatrix implements Graph{
         finishTime[vertex] = ++time[0];
     }
 
+    @Override
+    public String dijkstra(int vertexSource, int vertexDestination) {        
+    	int numVertex = this.graph.length;
+        // Array para armazenar a distância mínima de source até cada vértice
+        int[] dist = new int[numVertex];
+        // 	Inicializa todas as distâncias como infinito
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        // 	A distância de source até ele mesmo é zero
+        dist[vertexSource] = 0; 
+
+        //	Array para armazenar o predecessor de cada vértice no caminho mínimo
+        int[] predecessor = new int[numVertex];
+        //	Inicializa todos os predecessores como -1 (nenhum predecessor)
+        Arrays.fill(predecessor, -1); 
+
+        //	Fila de prioridade para selecionar o vértice com menor distância
+        PriorityQueue<GraphListAdjacencyNode> pq = new PriorityQueue<>(Comparator.comparingInt(GraphListAdjacencyNode::getWeight));
+        //	Adiciona o vértice de origem com distância 0
+        pq.offer(new GraphListAdjacencyNode(vertexSource, 0)); 
+
+        // Processamento do algoritmo de Dijkstra
+        while (!pq.isEmpty()) {
+            GraphListAdjacencyNode current = pq.poll();
+            int vertex = current.getVertex();
+
+            // Obtém os vizinhos do vértice atual
+            List<Integer> neighbors = getNeighbors(vertex);
+
+            // Itera sobre os vizinhos
+            for (int neighbor : neighbors) {
+                // Obtém o peso da aresta entre u e v
+                int weight = getWeight(vertex, neighbor);
+
+                // Relaxamento da aresta
+                if (dist[neighbor] > dist[vertex] + weight) {
+                    dist[neighbor] = dist[vertex] + weight;
+                    predecessor[neighbor] = vertex;
+                    pq.offer(new GraphListAdjacencyNode(neighbor, dist[neighbor]));
+                }
+            }
+        }
+
+        // Reconstrói o caminho mínimo utilizando o array de predecessores
+        return buildPath(predecessor, vertexSource, vertexDestination);
+    }
+
+    private String buildPath(int[] predecessor, int source, int destination) {
+        // Lista para armazenar os vértices do caminho mínimo
+        List<Integer> path = new ArrayList<>();
+        
+        // Reconstrói o caminho do destino até a origem
+        int current = destination;
+        while (current != -1) {
+            path.add(current);
+            current = predecessor[current];
+        }
+
+        // Inverte a lista para obter o caminho da origem até o destino
+        Collections.reverse(path);
+
+        // Monta a string de caminho
+        String result = "";
+        for (int i = 0; i < path.size() - 1; i++) {
+            int u = path.get(i);
+            int v = path.get(i + 1);
+            int weight = getWeight(u, v);
+            result += "{" + u + " -> " + v + " (peso: " + weight + ")} -> ";
+        }
+        // Adiciona o último vértice sem seta
+        result += path.get(path.size() - 1);
+
+        return result;
+    }
+    
+    private int getWeight(int vertexOut, int vertexIn) {
+    	Integer weight = this.graph[vertexOut][vertexIn]; 
+        
+        // Caso não encontre nenhuma aresta entre a origem e o destino informados, retorna 'infinito'.
+        return weight != null ? weight : Integer.MAX_VALUE; 
+    }
 
 }

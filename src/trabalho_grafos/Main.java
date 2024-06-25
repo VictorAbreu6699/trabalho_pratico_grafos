@@ -38,7 +38,7 @@ public class Main {
 	}
 	
 	public static void menu(Graph graph) {
-		int vertexIn, vertexOut, choice, vertex, vertexB, weight;
+		int vertexIn, vertexOut, choice, vertex, vertexB, weight, vertexSource, vertexDestination;
 		
         while (true) {
             System.out.println("Menu:");
@@ -52,8 +52,8 @@ public class Main {
             System.out.println("8. Trocar dois vértices");
             System.out.println("9. Busca em Largura");
             System.out.println("10. Busca em Profundidade");
-            System.out.println("11. Implementar o Algoritmo de Dijkstra");
-            System.out.println("12. Implementar o Algoritmo de Floyd Warshall");
+            System.out.println("11. Algoritmo de Dijkstra");
+            System.out.println("12. Algoritmo de Floyd Warshall");
             System.out.println("13. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -143,8 +143,12 @@ public class Main {
                 	
                     break;
                 case 11:
-                    // Implementar o Algoritmo de Dijkstra
-                    System.out.println("Funcionalidade não implementada ainda.");
+                	System.out.println("Origem:");
+            		vertexSource = getVertexMenu(graph);
+            		System.out.println("Destino:");
+            		vertexDestination = getVertexMenu(graph);
+        			
+        			System.out.println(graph.dijkstra(vertexSource, vertexDestination));
                     break;
                 case 12:
                     // Implementar o Algoritmo de Floyd Warshall

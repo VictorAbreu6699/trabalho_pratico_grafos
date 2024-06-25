@@ -15,4 +15,5 @@ public interface Graph {
 	public void replaceVertex(int vertex, int vertexB);
 	public String buscaEmLargura(int vertex);
 	public String buscaEmProfundidade(int vertex);
+	public String dijkstra(int vertexSource, int vertexDestination);
 }
