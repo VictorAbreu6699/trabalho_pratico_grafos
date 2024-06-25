@@ -194,7 +194,7 @@ public class GraphAdjacencyMatrix implements Graph{
 	    }
 	}
 
-	public String buscaEmLargura(int startVertex) {
+	public String buscaEmLargura(int initVertex) {
 		int numVertex = this.graph.length;
         // Array para rastrear os vértices visitados
         boolean[] visited = new boolean[numVertex];
@@ -212,13 +212,13 @@ public class GraphAdjacencyMatrix implements Graph{
         Queue<Integer> queue = new LinkedList<>();
         
         // Adiciona o vértice inicial na fila
-        queue.add(startVertex);
+        queue.add(initVertex);
         
         // Marca o vértice inicial como visitado
-        visited[startVertex] = true;
+        visited[initVertex] = true;
         
         // Define o nível do vértice inicial como 0 (raiz da árvore de busca)
-        level[startVertex] = 0;
+        level[initVertex] = 0;
 
         // Loop enquanto houver vértices na fila
         while (!queue.isEmpty()) {
@@ -275,5 +275,60 @@ public class GraphAdjacencyMatrix implements Graph{
 
         return neighbors;
     }
+    
+    public String buscaEmProfundidade(int startVertex) {
+        int numVertex = this.graph.length;
+        // Array para rastrear os vértices visitados
+        boolean[] visited = new boolean[numVertex];
+
+        // Array para armazenar o tempo de descoberta de cada vértice na árvore de busca
+        int[] discoveryTime = new int[numVertex];
+
+        // Array para armazenar o tempo de finalização de cada vértice na árvore de busca
+        int[] finishTime = new int[numVertex];
+
+        // Inicializa o tempo inicial (está sendo criado como array para poder atualizar os valores dentro das chamadas para as funções)
+        int[] time = {0};
+
+        // Array para armazenar o predecessor de cada vértice na árvore de busca
+        int[] predecessor = new int[numVertex];
+
+        // Inicializa todos os predecessores com -1 (nenhum predecessor)
+        Arrays.fill(predecessor, -1);
+
+        // Chama o método auxiliar de busca em profundidade recursivamente
+        buscaEmProfundidadeAux(startVertex, visited, time, discoveryTime, finishTime, predecessor);
+
+        String result = "Vértice | Descoberta | Finalização | Predecessor\n";
+        for (int i = 0; i < numVertex; i++) {
+            result += String.format("%7d | %10d | %12d | %11d%n", i, discoveryTime[i], finishTime[i], predecessor[i]);
+        }
+
+        return result;
+    }
+
+    private void buscaEmProfundidadeAux(int vertex, boolean[] visited, int[] time, int[] discoveryTime, int[] finishTime, int[] predecessor) {
+        // Marca o vértice como visitado
+        visited[vertex] = true;
+
+        // Atualiza o tempo de descoberta do vértice
+        discoveryTime[vertex] = ++time[0];
+
+        // Obtém a lista de vizinhos do vértice atual e ordena em ordem numérica crescente
+        List<Integer> neighbors = getNeighbors(vertex);
+        Collections.sort(neighbors);
+
+        // Itera sobre cada vizinho
+        for (int neighbor : neighbors) {
+            if (!visited[neighbor]) {
+                predecessor[neighbor] = vertex;
+                buscaEmProfundidadeAux(neighbor, visited, time, discoveryTime, finishTime, predecessor);
+            }
+        }
+
+        // Atualiza o tempo de finalização do vértice
+        finishTime[vertex] = ++time[0];
+    }
+
 
 }

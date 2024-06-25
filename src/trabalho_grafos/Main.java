@@ -137,8 +137,10 @@ public class Main {
                 	
                     break;
                 case 10:
-                    // Busca em Profundidade
-                    System.out.println("Funcionalidade não implementada ainda.");
+            		vertex = getVertexMenu(graph);
+                	
+                	System.out.println(graph.buscaEmProfundidade(vertex));
+                	
                     break;
                 case 11:
                     // Implementar o Algoritmo de Dijkstra

@@ -14,4 +14,5 @@ public interface Graph {
 	public void alterEdgeWeight(int vertexOut, int vertexIn, int weight);
 	public void replaceVertex(int vertex, int vertexB);
 	public String buscaEmLargura(int vertex);
+	public String buscaEmProfundidade(int vertex);
 }
