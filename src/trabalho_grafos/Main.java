@@ -150,9 +150,8 @@ public class Main {
         			
         			System.out.println(graph.dijkstra(vertexSource, vertexDestination));
                     break;
-                case 12:
-                    // Implementar o Algoritmo de Floyd Warshall
-                    System.out.println("Funcionalidade não implementada ainda.");
+                case 12:            		
+            		System.out.println(graph.floydWarshall());
                     break;
                 case 13:
                     System.out.println("Saindo...");

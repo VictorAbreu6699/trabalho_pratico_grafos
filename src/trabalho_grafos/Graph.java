@@ -16,4 +16,5 @@ public interface Graph {
 	public String buscaEmLargura(int vertex);
 	public String buscaEmProfundidade(int vertex);
 	public String dijkstra(int vertexSource, int vertexDestination);
+	public String floydWarshall();
 }

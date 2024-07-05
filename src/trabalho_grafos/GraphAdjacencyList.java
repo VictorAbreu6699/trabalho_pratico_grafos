@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -426,6 +427,11 @@ public class GraphAdjacencyList implements Graph{
                 }
             }
         }
+        
+        // Verifica se existe um caminho entre a origem e o destino
+        if (dist[vertexDestination] == Integer.MAX_VALUE) {
+            return "Não existe caminho entre " + vertexSource + " e " + vertexDestination;
+        }
 
         // Reconstrói o caminho mínimo utilizando o array de predecessores
         return buildPath(predecessor, vertexSource, vertexDestination);
@@ -471,5 +477,57 @@ public class GraphAdjacencyList implements Graph{
         // Caso não encontre nenhuma aresta entre a origem e o destino informados, retorna 'infinito'.
         return Integer.MAX_VALUE; 
     }
+    
+    @Override
+    public String floydWarshall() {
+        // Matriz de distâncias
+        int[][] dist = new int[numVertex][numVertex];
+
+        // Inicializa a matriz de distâncias
+        for (int i = 0; i < numVertex; i++) {
+        	//	Define a distância inicial como infinita
+            Arrays.fill(dist[i], Integer.MAX_VALUE);
+            //	A distância de um vértice para ele mesmo é zero
+            dist[i][i] = 0; 
+        }
+
+        // Preenche a matriz de distâncias com os pesos das arestas existentes
+        for (int i = 0; i < numVertex; i++) {
+            GraphListAdjacencyNode current = this.graph.get(i);
+            while (current != null) {
+            	// Define a distância da aresta (i -> j)
+                dist[i][current.getVertex()] = current.getWeight(); 
+                current = current.getSuccessor();
+            }
+        }
+
+        // Implementação do algoritmo de Floyd-Warshall
+        for (int k = 0; k < numVertex; k++) {
+            for (int i = 0; i < numVertex; i++) {
+                for (int j = 0; j < numVertex; j++) {
+                    // Se as distâncias intermediárias não são infinitas, atualiza a distância mínima
+                    if (dist[i][k] != Integer.MAX_VALUE && dist[k][j] != Integer.MAX_VALUE) {
+                        dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
+                    }
+                }
+            }
+        }
+
+        String result = "Distâncias mínimas:\n";
+        for (int i = 0; i < numVertex; i++) {
+            for (int j = 0; j < numVertex; j++) {
+                if (dist[i][j] == Integer.MAX_VALUE) {
+                	// Usa "∞" para representar a distância infinita
+                    result += "∞, "; 
+                } else {
+                    result += dist[i][j] + ", ";
+                }
+            }
+            result += "\n"; 
+        }
+
+        return result;
+    }
+
 
 }
